@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import auth0 from "../lib/auth0";
 import router from "next/router";
 
-import { checkExists, findCheckNearbyChekin } from "../lib/markers";
+import { checkExists, findCheckNearbyChekin } from "../model/markers";
 
 const App = (props) => {
   useEffect(() => {

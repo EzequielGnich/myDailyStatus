@@ -1,5 +1,5 @@
 import auth0 from "../../lib/auth0";
-import { setStatus } from "../../lib/markers";
+import { setStatus } from "../../model/markers";
 
 const saveStatus = async (request, response) => {
   const session = await auth0.getSession(request);

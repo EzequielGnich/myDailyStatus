@@ -1,9 +1,9 @@
 import admin from "firebase-admin";
 
 // currenteDate é uma função para buscar a data atual
-import { currentDate } from "./currentDate";
-import { distance } from "./geo";
-import { db } from "./db";
+import { currentDate } from "../lib/currentDate";
+import { distance } from "../lib/geo";
+import { db } from "../lib/db";
 
 export const checkExists = async (user) => {
   const todayCheckin = await db
