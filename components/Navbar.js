@@ -2,8 +2,7 @@ import React from "react";
 
 import NavLink from "./parts/NavLink";
 
-const Navbar = (props) => {
-  console.log(props);
+const Navbar = () => {
   return (
     <div>
       <nav className="bg-gray-500 py-4 text-center shadow-xl">
