@@ -39,39 +39,36 @@ const App = (props) => {
 export default App;
 
 export async function getServerSideProps({ req }) {
+  let user = {};
+  let isAuth = false;
+  let forceCreate = false;
+  let checkins = [];
+
   const session = await auth0.getSession(req);
 
   if (session) {
+    isAuth = true;
+    user = session.user;
+
     const todaysData = await checkExists(session.user.sub);
-    // Variavel para forçar o usuario a criar uma postagem
-    let forceCreate = true;
+
+    if (!todaysData) {
+      // Variavel para forçar o usuario a criar uma postagem
+      forceCreate = true;
+    } else {
+      checkins = await findCheckNearbyChekin(todaysData);
+    }
 
     if (todaysData) {
-      forceCreate = false; // Quando false o usuário não é necessário criar uma postagem
-
-      // Função para
-      const checkinsList = await findCheckNearbyChekin(todaysData);
-      return {
-        props: {
-          isAuth: true,
-          user: session.user,
-          forceCreate: false,
-          checkins: checkinsList,
-        },
-      };
+      forceCreate = false; // Quando false não é necessário criar uma postagem
     }
-    return {
-      props: {
-        isAuth: true,
-        user: session.user,
-        forceCreate,
-      },
-    };
   }
   return {
     props: {
-      isAuth: false,
-      user: {},
+      isAuth,
+      user,
+      forceCreate,
+      checkins,
     },
   };
 }
