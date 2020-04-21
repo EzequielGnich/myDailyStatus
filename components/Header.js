@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuth } from "../lib/authContext";
+// import { useAuth } from "../lib/authContext";
 
 import Navbar from "../components/Navbar";
 
 const Header = () => {
-  const auth = useAuth();
+  // const auth = useAuth();
 
   return (
     <header className="bg-gray-200">
@@ -17,7 +17,6 @@ const Header = () => {
         />
       </h1>
       <Navbar />
-      <pre>{JSON.stringify(auth)}</pre>
     </header>
   );
 };
