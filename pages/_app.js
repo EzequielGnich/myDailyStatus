@@ -7,9 +7,9 @@ import { AuthProvider } from "../lib/authContext";
 const App = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
-      <div>
+      <div className="h-screen flex flex-col justify-between">
         <Header />
-        <main className="min-h-screen container mx-auto">
+        <main className="container mx-auto h-full">
           <Component {...pageProps} />
         </main>
         <Footer />
