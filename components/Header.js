@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
-import fetch from "isomorphic-fetch";
+import React from "react";
+import { useAuth } from "../lib/authContext";
 
 import Navbar from "../components/Navbar";
 
 const Header = () => {
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    const getMe = async () => {
-      const res = await fetch("/api/me");
-      const authUser = await res.json();
-      setUser(authUser);
-    };
-    getMe();
-  }, []);
+  const auth = useAuth();
 
   return (
     <header className="bg-gray-200">
@@ -25,7 +17,7 @@ const Header = () => {
         />
       </h1>
       <Navbar />
-      <pre>{JSON.stringify(user)}</pre>
+      <pre>{JSON.stringify(auth)}</pre>
     </header>
   );
 };
