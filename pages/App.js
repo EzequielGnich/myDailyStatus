@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import auth0 from "../lib/auth0";
 import router from "next/router";
+import { GoogleMap } from "../components/GoogleMap";
+import { Card } from "../components/Card";
 
 import { checkExists, findCheckNearbyChekin } from "../model/markers";
 
@@ -16,22 +18,24 @@ const App = (props) => {
   if (!props.isAuth || props.forceCreate) return null;
 
   return (
-    <div>
-      <h1 className="my-4 text-center font-bold font-black text-2xl">
-        Status próximos a você:
-      </h1>
-      <table>
-        {props.checkins.map((checkin) => {
-          return (
-            <tr key={checkin.id}>
-              <td>{checkin.id === props.user.sub ? "Seu Status" : ""}</td>
-              <td>{checkin.status}</td>
-              <td>{JSON.stringify(checkin.coords)}</td>
-              <td>{checkin.distance}</td>
-            </tr>
-          );
-        })}
-      </table>
+    <div className="flex items-center flex-col">
+      <div
+        className="flex items-center justify-between p-2 mt-4"
+        style={{ width: "90vw" }}
+      >
+        <div>
+          <strong className="my-4 text-center font-bold font-black text-2xl">
+            Pessoas próximas a você:
+          </strong>
+          <GoogleMap {...props} />
+        </div>
+        <div>
+          <strong className="my-4 text-center font-bold font-black text-2xl">
+            Meu status:
+          </strong>
+          <Card {...props} />
+        </div>
+      </div>
     </div>
   );
 };
