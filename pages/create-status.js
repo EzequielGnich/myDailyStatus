@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import router from "next/router";
 import axios from "axios";
 import auth0 from "../lib/auth0";
+import { useAuth } from "../lib/authContext";
 
 const CreateStatus = () => {
+  const auth = useAuth();
+
   const [dados, setDados] = useState({
     status: "fine",
     coords: {
@@ -11,6 +14,11 @@ const CreateStatus = () => {
       long: null,
     },
   });
+
+  if (auth.isAuthReady && !auth.isAuth) {
+    router.push("/");
+  }
+
   const getMyLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -28,11 +36,7 @@ const CreateStatus = () => {
   };
 
   const saveMyStatus = async () => {
-    const { data } = await axios.post("/api/save-status", dados);
-
-    if (data.msg === "ok") {
-      return router.push("/app");
-    }
+    await axios.post("/api/save-status", dados);
   };
 
   const onStatusChange = (e) => {
