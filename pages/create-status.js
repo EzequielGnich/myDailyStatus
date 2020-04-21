@@ -37,6 +37,8 @@ const CreateStatus = () => {
 
   const saveMyStatus = async () => {
     await axios.post("/api/save-status", dados);
+
+    router.push("/app");
   };
 
   const onStatusChange = (e) => {
