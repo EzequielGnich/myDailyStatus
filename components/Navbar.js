@@ -5,13 +5,12 @@ import { useAuth } from "../lib/authContext";
 
 const Navbar = () => {
   const auth = useAuth();
-  console.log(auth.user.name);
   return (
     <div>
       <nav className="bg-gray-500 py-4 text-center shadow-xl">
-        {auth.isAuth && <NavLink href="/app">Pagina Inicial</NavLink>}
+        <NavLink href="/">Pagina Inicial</NavLink>
+        {auth.isAuth && <NavLink href="/app">App Status</NavLink>}
         <NavLink href="/about">Sobre</NavLink>
-        {auth.isAuth && <NavLink href="/register">Cadastro</NavLink>}
         {auth.isAuth && (
           <a
             href="/api/logout"
